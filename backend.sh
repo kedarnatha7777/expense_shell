@@ -48,6 +48,38 @@ id expense &>>$LOG_FILE
         echo  "expense user already existed "
     else
        echo  "expense user not existed "
-       useradd expense 
+       useradd expense &>>$LOG_FILE
     fi
 
+mkdir -p /app &>>$LOG_FILE
+VALIDATION_FUNCTION $? "creating app dir"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+VALIDATION_FUNCTION $? "downlode backend"
+
+cd /app
+unzip /tmp/backend.zip
+VALIDATION_FUNCTION $? "unzip the backend"
+
+install npm 
+VALIDATION_FUNCTION  $? "downlode the dependencies"
+
+cp /home/ec2-user/backend.service /etc/systemd/system/backend.service 
+VALIDATION_FUNCTION  $? "copying the backend service"
+
+systemctl daemon-reload
+VALIDATION_FUNCTION  $? "daemon -reload "
+
+systemctl start backend
+VALIDATION_FUNCTION  $? "starting backend "
+systemctl enable backend
+VALIDATION_FUNCTION  $? "enable backend "
+
+dnf install mysql -y
+VALIDATION_FUNCTION  $? "installong mysql clint "
+
+mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql 
+VALIDATION_FUNCTION  $? "schema loading"
+
+systemctl restart backend
+VALIDATION_FUNCTION  $? "restarting backed"

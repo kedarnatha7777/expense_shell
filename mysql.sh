@@ -41,13 +41,13 @@ VALIDATION_FUNCTION $? "enabling mysqld"
 systemctl start mysqld &>>$LOG_FILE
 VALIDATION_FUNCTION $? "starting  mysqld"
 
-mysql -h db.78skedar.onlne -uroot -p${db_password} -e 'SHOW DATABASES'
+mysql -h db.78skedar.onlne -uroot -p${db_password} -e 'SHOW DATABASES' &>>$LOG_FILE
 if [ $? -eq 0 ]
     then
         echo "mysql root password is already setuped "
     else
         echo -e  "mysql root password is not setuped "
-        mysql_secure_installation --set-uroot-pass ${db_password} 
+        mysql_secure_installation --set-uroot-pass ${db_password}  &>>$LOG_FILE
     fi 
 
 

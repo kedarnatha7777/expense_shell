@@ -54,7 +54,7 @@ id expense &>>$LOG_FILE
 mkdir -p /app &>>$LOG_FILE
 VALIDATION_FUNCTION $? "creating app dir"
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
 VALIDATION_FUNCTION $? "downlode backend"
 
 cd /app
@@ -79,7 +79,7 @@ VALIDATION_FUNCTION  $? "enable backend "
 dnf install mysql -y &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "installong mysql clint "
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
+mysql -h db.78skedar.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "schema loading"
 
 systemctl restart backend &>>$LOG_FILE

@@ -42,7 +42,7 @@ systemctl start mysqld &>>$LOG_FILE
 VALIDATION_FUNCTION $? "starting  mysqld"
 
 mysql -h db.78skedar.online -uroot -p${db_password} -e 'SHOW DATABASES' &>>$LOG_FILE
-if [ $? -eq 0 ]
+if [ $? -nq 0 ]
     then
         echo "mysql root password is already setuped "
     else

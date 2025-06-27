@@ -58,14 +58,14 @@ curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expen
 VALIDATION_FUNCTION $? "downlode backend"
 
 cd /app
-rm -rf /app/*
-unzip /tmp/backend.zip
+rm -rf /app/* 
+unzip /tmp/backend.zip &>>$LOG_FILE
 VALIDATION_FUNCTION $? "unzip the backend"
 
 npm install &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "downlode the dependencies"
 
-cp /home/ec2-user/backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
+cp /home/ec2-user/expense_shell/backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "copying the backend service"
 
 systemctl daemon-reload &>>$LOG_FILE

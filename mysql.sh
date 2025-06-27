@@ -41,7 +41,7 @@ VALIDATION_FUNCTION $? "enabling mysqld"
 systemctl start mysqld &>>$LOG_FILE
 VALIDATION_FUNCTION $? "starting  mysqld"
 
-mysql -h db.78skedar.onlne -uroot -p${db_password} -e 'SHOW DATABASES' &>>$LOG_FILE
+mysql -h db.78skedar.online -uroot -p${db_password} -e 'SHOW DATABASES' &>>$LOG_FILE
 if [ $? -eq 0 ]
     then
         echo "mysql root password is already setuped "

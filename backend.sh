@@ -61,7 +61,7 @@ cd /app
 unzip /tmp/backend.zip
 VALIDATION_FUNCTION $? "unzip the backend"
 
-install npm 
+install npm -y
 VALIDATION_FUNCTION  $? "downlode the dependencies"
 
 cp /home/ec2-user/backend.service /etc/systemd/system/backend.service 

@@ -12,7 +12,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-if[ $USER -eq 0 ]
+if [ $USER -eq 0 ]
 then    
     echo -e  "$G you are super user $N "
 else 

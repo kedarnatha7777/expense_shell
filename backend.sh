@@ -39,15 +39,15 @@ VALIDATION_FUNCTION $? "enabling node-js"
 dnf install nodejs -y  &>>$LOG_FILE
 VALIDATION_FUNCTION $? "install  node-js"
 
-useradd expense &>>$LOG_FILE
-VALIDATION_FUNCTION $? "creating expense user "
+# useradd expense &>>$LOG_FILE
+# VALIDATION_FUNCTION $? "creating expense user "
 
-# id expense 
-#  if [ $? -eq 0 ]
-#     then
-#         echo  "expense user already existed "
-#     else
-#        echo  "expense user not existed "
-#        useradd expense 
-#     fi
+id expense 
+ if [ $? -eq 0 ]
+    then
+        echo  "expense user already existed "
+    else
+       echo  "expense user not existed "
+       useradd expense 
+    fi
 

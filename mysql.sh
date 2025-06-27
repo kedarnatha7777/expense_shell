@@ -14,11 +14,11 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-if[ $USER -eq 0 ]
-then    
+if [ $USER -eq 0 ]
+then
     echo -e  "$G you are super user $N "
 else 
-    echo -e " $R  you are not super user $N"
+    echo -e "$R you are not super user $N "
     exit 1 
 fi 
 

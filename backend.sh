@@ -58,28 +58,29 @@ curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expen
 VALIDATION_FUNCTION $? "downlode backend"
 
 cd /app
+rm -rf /app/*
 unzip /tmp/backend.zip
 VALIDATION_FUNCTION $? "unzip the backend"
 
-install npm -y
+npm install &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "downlode the dependencies"
 
-cp /home/ec2-user/backend.service /etc/systemd/system/backend.service 
+cp /home/ec2-user/backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "copying the backend service"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "daemon -reload "
 
-systemctl start backend
+systemctl start backend &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "starting backend "
-systemctl enable backend
+systemctl enable backend &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "enable backend "
 
-dnf install mysql -y
+dnf install mysql -y &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "installong mysql clint "
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql 
+mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "schema loading"
 
-systemctl restart backend
+systemctl restart backend &>>$LOG_FILE
 VALIDATION_FUNCTION  $? "restarting backed"

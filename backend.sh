@@ -30,7 +30,7 @@ VALIDATION_FUNCTION(){
     fi 
 }
 
-dnf module disble nodejs  -y &>>$LOG_FILE
+dnf module disable nodejs  -y &>>$LOG_FILE
 VALIDATION_FUNCTION $? "diasbling node-js"
 
 dnf module enable nodejs:20 -y  &>>$LOG_FILE

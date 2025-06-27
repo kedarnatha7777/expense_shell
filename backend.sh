@@ -42,7 +42,7 @@ VALIDATION_FUNCTION $? "install  node-js"
 # useradd expense &>>$LOG_FILE
 # VALIDATION_FUNCTION $? "creating expense user "
 
-id expense 
+id expense &>>$LOG_FILE
  if [ $? -eq 0 ]
     then
         echo  "expense user already existed "

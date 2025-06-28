@@ -46,7 +46,7 @@ VALIDATION_FUNCTION $? "downlode the frontend code "
 cd /usr/share/nginx/html/
 unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATION_FUNCTION $? "install nginx "
-cp /home/ec2-user/expense_shell/frontend.conf /etc/nginx/default.d/expense.conf &>>$LOG_FILE
+cp /home/ec2-user/expense_shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOG_FILE
 VALIDATION_FUNCTION $? "copying the expense.conf "
 systemctl restart nginx &>>$LOG_FILE
 VALIDATION_FUNCTION $? "restart nginx "
